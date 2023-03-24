@@ -1,0 +1,47 @@
+{
+  "name": "remark-lint-docusaurus-empty-lines-around-admonition-content",
+  "version": "0.1.0",
+  "description": "remark-lint rule to warn when an admonition does not have empty lines around its content",
+  "license": "MIT",
+  "keywords": [
+    "remark",
+    "lint",
+    "rule",
+    "remark-lint-rule",
+    "docusaurus",
+    "empty",
+    "lines",
+    "admonition"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3v0k4/remark-lint-docusaurus-empty-lines-around-admonition-content.git"
+  },
+  "bugs": "https://github.com/3v0k4/remark-lint-docusaurus-empty-lines-around-admonition-content/issues",
+  "author": "Riccardo Odone <riccardo.odone@gmail.com> (https://odone.io)",
+  "contributors": [
+    "Riccardo Odone <riccardo.odone@gmail.com> (https://odone.io)"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/index.d.ts",
+    "dist/index.js"
+  ],
+  "dependencies": {
+    "@types/mdast": "^3.0.0",
+    "@types/node": "^18.15.5",
+    "unified": "^10.0.0",
+    "unified-lint-rule": "^2.0.0",
+    "unist-util-generated": "^2.0.0",
+    "unist-util-visit": "^4.0.0"
+  },
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "npm test && npm run build:only",
+    "build:only": "tsc",
+    "clean": "rm -rf dist",
+    "test": "npm run build:only && cd test && npm test"
+  }
+}

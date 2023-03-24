@@ -1,0 +1,12 @@
+{
+  "name": "test",
+  "private": true,
+  "dependencies": {
+    "remark-cli": "^11.0.0",
+    "remark-lint": "^9.1.1",
+    "remark-lint-docusaurus-empty-lines-around-admonition-content": "file:../"
+  },
+  "scripts": {
+    "test": "npm install && remark --use remark-lint-docusaurus-empty-lines-around-admonition-content test.md"
+  }
+}
