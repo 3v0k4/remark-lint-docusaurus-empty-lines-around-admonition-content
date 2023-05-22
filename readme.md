@@ -26,7 +26,7 @@ This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908
 In Node.js (16.0+), install with npm:
 
 ```sh
-npm install --save-dev https://github.com/3v0k4/remark-lint-docusaurus-empty-lines-around-admonition-content
+npm install --save-dev remark-lint-docusaurus-empty-lines-around-admonition-content
 ```
 
 ## Use
