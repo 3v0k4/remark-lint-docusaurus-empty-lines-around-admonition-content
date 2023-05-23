@@ -6,7 +6,7 @@ ipsum
 dolor sit amet
 
 :::caution
-⛔️ missing empty lines on both sides
+⛔️ missing empty lines on both sides ⛔️
 :::
 
 :::caution
@@ -14,6 +14,7 @@ dolor sit amet
 missing
 empty lines on
 both sides
+⛔️
 :::
 
 :::caution
@@ -30,4 +31,8 @@ both sides
 
 ✅ ok
 
+:::
+
+:::caution
+`missing ⛔️ empty lines ⛔️ on both sides`
 :::

@@ -16,16 +16,15 @@ const rule = lintRule({
             return;
         }
         const childrenArray = node.children;
-        childrenArray.forEach((child) => {
-            // [\s\S] matches any character including newlines
-            // . matches any character except newlines
-            if (/^:::\w+[\s\S]*.\n/.test(child.value)) {
-                file.message(`Add an empty line after the admonition opening ${child.value.split("\n")[0]}`, node);
-            }
-            if (/^[\s\S]*.\n:::/.test(child.value)) {
-                file.message(`Add an empty line before the admonition closing :::`, node);
-            }
-        });
+        const value = childrenArray.map((child) => child.value).join("");
+        // [\s\S] matches any character including newlines
+        // . matches any character except newlines
+        if (/^:::\w+[\s\S]*.\n/.test(value)) {
+            file.message(`Add an empty line after the admonition opening ${value.split("\n")[0]}`, node);
+        }
+        if (/^[\s\S]*.\n:::/.test(value)) {
+            file.message(`Add an empty line before the admonition closing :::`, node);
+        }
     });
 });
 export default rule;

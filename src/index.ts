@@ -23,26 +23,25 @@ const rule = lintRule(
       }
 
       const childrenArray = node.children as { value: string }[];
+      const value = childrenArray.map((child) => child.value).join("");
 
-      childrenArray.forEach((child) => {
-        // [\s\S] matches any character including newlines
-        // . matches any character except newlines
-        if (/^:::\w+[\s\S]*.\n/.test(child.value)) {
-          file.message(
-            `Add an empty line after the admonition opening ${
-              child.value.split("\n")[0]
-            }`,
-            node
-          );
-        }
+      // [\s\S] matches any character including newlines
+      // . matches any character except newlines
+      if (/^:::\w+[\s\S]*.\n/.test(value)) {
+        file.message(
+          `Add an empty line after the admonition opening ${
+            value.split("\n")[0]
+          }`,
+          node
+        );
+      }
 
-        if (/^[\s\S]*.\n:::/.test(child.value)) {
-          file.message(
-            `Add an empty line before the admonition closing :::`,
-            node
-          );
-        }
-      });
+      if (/^[\s\S]*.\n:::/.test(value)) {
+        file.message(
+          `Add an empty line before the admonition closing :::`,
+          node
+        );
+      }
     });
   }
 );
