@@ -1,6 +1,41 @@
 import { lintRule } from "unified-lint-rule";
 import { visit } from "unist-util-visit";
 import { generated } from "unist-util-generated";
+import type { Literal, Parent } from "unist";
+
+const isMissingPrev = (
+  parent: Parent,
+  child: Literal<string>,
+  index: number | null
+): boolean => {
+  if (index === null) return false;
+  const prev = parent.children[index - 1];
+  if (!prev) return false;
+  if (!prev.position) return false;
+  if (!child.position) return false;
+
+  return (
+    prev.position.end.line === child.position.start.line ||
+    prev.position.end.line + 1 === child.position.start.line
+  );
+};
+
+const isMissingNext = (
+  parent: Parent,
+  child: Literal<string>,
+  index: number | null
+): boolean => {
+  if (index === null) return false;
+  const next = parent.children[index + 1];
+  if (!next) return false;
+  if (!next.position) return false;
+  if (!child.position) return false;
+
+  return (
+    child.position.end.line === next.position.start.line ||
+    child.position.end.line + 1 === next.position.start.line
+  );
+};
 
 const rule = lintRule(
   {
@@ -9,7 +44,7 @@ const rule = lintRule(
     url: "https://github.com/3v0k4/remark-lint-docusaurus-empty-lines-around-admonition-content",
   },
   (tree, file) => {
-    visit(tree, (node) => {
+    visit(tree, (node, index, parent) => {
       if (generated(node)) {
         return;
       }
@@ -22,26 +57,45 @@ const rule = lintRule(
         return;
       }
 
-      const childrenArray = node.children as { value: string }[];
-      const value = childrenArray.map((child) => child.value).join("");
+      const childrenArray = (node as Parent).children as Literal<string>[];
 
-      // [\s\S] matches any character including newlines
-      // . matches any character except newlines
-      if (/^:::\w+[\s\S]*.\n/.test(value)) {
-        file.message(
-          `Add an empty line after the admonition opening ${
-            value.split("\n")[0]
-          }`,
-          node
-        );
-      }
+      childrenArray.forEach((child) => {
+        if (/^:::\w+\n/.test(child.value)) {
+          file.message(
+            `Add an empty line after the admonition opening ${
+              child.value.split("\n")[0]
+            }`,
+            node
+          );
+        }
 
-      if (/^[\s\S]*.\n:::/.test(value)) {
-        file.message(
-          `Add an empty line before the admonition closing :::`,
-          node
-        );
-      }
+        if (/\n:::/.test(child.value)) {
+          file.message(
+            `Add an empty line before the admonition closing :::`,
+            node
+          );
+        }
+
+        if (/^:::\w+/.test(child.value)) {
+          if (isMissingNext(parent, child, index)) {
+            file.message(
+              `Add an empty line after the admonition opening :::${child.value.slice(
+                3
+              )}`,
+              node
+            );
+          }
+        }
+
+        if (/^[\n]*:::$/.test(child.value)) {
+          if (isMissingPrev(parent, child, index)) {
+            file.message(
+              `Add an empty line before the admonition closing :::`,
+              node
+            );
+          }
+        }
+      });
     });
   }
 );

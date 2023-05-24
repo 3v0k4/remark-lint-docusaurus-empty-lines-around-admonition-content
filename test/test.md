@@ -3,8 +3,6 @@
 lorem
 ipsum
 
-dolor sit amet
-
 :::caution
 ⛔️ missing empty lines on both sides ⛔️
 :::
@@ -35,4 +33,18 @@ both sides
 
 :::caution
 `missing ⛔️ empty lines ⛔️ on both sides`
+:::
+
+:::caution
+```
+missing empty ⛔️ ⛔️ lines on both sides
+```
+:::
+
+:::caution
+
+```
+ok
+```
+
 :::
