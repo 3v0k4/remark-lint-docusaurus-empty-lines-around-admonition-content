@@ -1,6 +1,6 @@
 {
   "name": "remark-lint-docusaurus-empty-lines-around-admonition-content",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "remark-lint rule to warn when an admonition does not have empty lines around its content",
   "license": "MIT",
   "keywords": [
