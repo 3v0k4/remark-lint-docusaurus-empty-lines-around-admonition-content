@@ -18,9 +18,9 @@
     "url": "https://github.com/3v0k4/remark-lint-docusaurus-empty-lines-around-admonition-content.git"
   },
   "bugs": "https://github.com/3v0k4/remark-lint-docusaurus-empty-lines-around-admonition-content/issues",
-  "author": "Riccardo Odone <riccardo.odone@gmail.com> (https://odone.io)",
+  "author": "Riccardo Odone <riccardo.odone@gmail.com>",
   "contributors": [
-    "Riccardo Odone <riccardo.odone@gmail.com> (https://odone.io)"
+    "Riccardo Odone <riccardo.odone@gmail.com>"
   ],
   "type": "module",
   "main": "dist/index.js",

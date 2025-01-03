@@ -87,4 +87,4 @@ See [test/test.md](test/test.md) or run the test with `npm test`.
 
 ## License
 
-[MIT](https://github.com/remarkjs/remark-lint/blob/main/license) © [Riccardo Odone](https://odone.io)
+[MIT](https://github.com/remarkjs/remark-lint/blob/main/license) © [Riccardo Odone](https://odone.me)
